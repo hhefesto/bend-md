@@ -74,9 +74,21 @@ def md.white(+c: U32) -> Bool:
 # Escaping (cmark's houdini)
 # -------------------------
 
+def md.esc.pick(amp: Bool, lt: Bool, gt: Bool, q: Bool, +c: U32) -> String:
+  match amp lt gt q:
+    case True{} x y z:
+      "&amp;"
+    case False{} True{} y z:
+      "&lt;"
+    case False{} False{} True{} z:
+      "&gt;"
+    case False{} False{} False{} True{}:
+      "&quot;"
+    case False{} False{} False{} False{}:
+      SCon{Chr{c}, ""}
+
 def md.esc.c(+c: U32) -> String:
-  md.if(String, U32.is_eq(c, 38), u => "&amp;", u => md.if(String, U32.is_eq(c, 60), u => "&lt;", u => md.if(String, U32.is_eq(c, 62), u => "&gt;",
-    u => md.if(String, U32.is_eq(c, 34), u => "&quot;", u => SCon{Chr{c}, ""}))))
+  md.esc.pick(U32.is_eq(c, 38), U32.is_eq(c, 60), U32.is_eq(c, 62), U32.is_eq(c, 34), c)
 
 def md.esc.at(plain: Bool, +c: U32, rest: String) -> String:
   match plain:

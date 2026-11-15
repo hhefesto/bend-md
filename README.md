@@ -23,3 +23,12 @@ total: fuel bounds their steps.
 19 pages of 200 items and the others it asks for, the same bytes. Not
 covered: reference links and footnotes, the full HTML5 entity table (44
 named entities), a few lazy-continuation corners.
+
+**Laws** (`PROPOSED.bend`, proved in `PROOF.bend`, `--verdict` too):
+`esc_inert`, escaped text is inert: whatever a message holds, what `md.esc`
+writes of it has no `<`, `>` or `"` of its own (as inert as what follows
+it), so text shown as text never becomes markup. Its proof takes each
+character's four tests (`&`, `<`, `>`, `"`) as they come out, the 16 cases
+computed. Mutants (`../mutants.sh md`): quote-passes, lt-written-as-is,
+each caught. Not yet: that the HTML is cmark-gfm's (checked by
+compare.sh), that link targets are inert too.

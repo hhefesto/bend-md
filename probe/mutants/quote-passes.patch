@@ -1,0 +1,11 @@
+--- a/Md.bend	2026-11-15 07:41:25.344432598 -0600
++++ b/Md.bend	2026-11-15 07:41:25.349226013 -0600
+@@ -103,7 +103,7 @@
+     case SNil{}:
+       out
+     case SCon{Chr{+c}, t}:
+-      md.esc.at(Bool.not(U32.is_eq(c, 38) || U32.is_eq(c, 60) || U32.is_eq(c, 62) || U32.is_eq(c, 34)), c, md.esc(t, out))
++      md.esc.at(Bool.not(U32.is_eq(c, 38) || U32.is_eq(c, 60) || U32.is_eq(c, 62)), c, md.esc(t, out))
+ 
+ def md.hex(+n: U32) -> U32:
+   Bool.pick(U32, U32.is_lt(n, 10), (n + 48 : U32), (n + 55 : U32))

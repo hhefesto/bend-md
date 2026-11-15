@@ -1,0 +1,11 @@
+--- a/Md.bend	2026-11-15 07:41:25.381072132 -0600
++++ b/Md.bend	2026-11-15 07:41:25.385226017 -0600
+@@ -79,7 +79,7 @@
+     case True{} x y z:
+       "&amp;"
+     case False{} True{} y z:
+-      "&lt;"
++      "<"
+     case False{} False{} True{} z:
+       "&gt;"
+     case False{} False{} False{} True{}:
