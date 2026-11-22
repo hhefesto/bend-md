@@ -1,5 +1,5 @@
 import Base
-import ../text/Text.bend as X
+import ../bend-text/Text.bend as X
 
 # Md: GitHub's markdown (CommonMark with tables, strikethrough, autolinks
 # and task lists) read into a tree of blocks and inlines, and the tree

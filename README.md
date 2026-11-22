@@ -29,6 +29,25 @@ named entities), a few lazy-continuation corners.
 writes of it has no `<`, `>` or `"` of its own (as inert as what follows
 it), so text shown as text never becomes markup. Its proof takes each
 character's four tests (`&`, `<`, `>`, `"`) as they come out, the 16 cases
-computed. Mutants (`../mutants.sh md`): quote-passes, lt-written-as-is,
+computed. Mutants (`./mutants.sh`): quote-passes, lt-written-as-is,
 each caught. Not yet: that the HTML is cmark-gfm's (checked by
 compare.sh), that link targets are inert too.
+
+## This repository
+
+Written for mugen-app (mugen's chat in a browser) as part of its Bend
+backend, which replaced a Haskell one: a mention above of `backend/`,
+`server/` or `server/test/compare.sh` is that app's. The libraries written
+with it: [bend-wire](https://github.com/hhefesto/bend-wire), [bend-route](https://github.com/hhefesto/bend-route), [bend-json](https://github.com/hhefesto/bend-json), [bend-files](https://github.com/hhefesto/bend-files), [bend-sha2](https://github.com/hhefesto/bend-sha2), [bend-radix](https://github.com/hhefesto/bend-radix), [bend-text](https://github.com/hhefesto/bend-text), [bend-time](https://github.com/hhefesto/bend-time), [bend-entropy](https://github.com/hhefesto/bend-entropy), [bend-bcrypt](https://github.com/hhefesto/bend-bcrypt), [bend-bucket](https://github.com/hhefesto/bend-bucket).
+
+**Using it.** Bend imports by path: clone this repository as `bend-md/`
+beside your code, with the ones it imports beside it (`bend-text/`),
+and import it: `import ../bend-md/Md.bend as X`. In a Nix build, copy the flake's
+source (or its `packages.default`) there.
+
+**Checks** (`nix flake check`, with the pinned Bend 2.0.39):
+`bend PROOF.bend --verdict` (its laws, rechecked by the BendTT kernel);
+`./mutants.sh` (each mistake in `probe/mutants/` caught by the laws);
+`bend FILE.bend --check-only` on each module.
+
+**License**: MIT (`LICENSE`).
